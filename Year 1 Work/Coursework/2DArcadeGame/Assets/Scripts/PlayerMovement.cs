@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Collidable")
         {
             gameManagerCode.playerDead = true;
-            gameManagerCode.save();
+            gameManagerCode.saveGame();
             gameManagerCode.StartCoroutine(gameManagerCode.LoadGameoverScreen());
             Destroy(gameObject);
         }

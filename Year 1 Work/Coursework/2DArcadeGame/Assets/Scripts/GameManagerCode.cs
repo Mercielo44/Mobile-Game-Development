@@ -145,35 +145,48 @@ public class GameManagerCode : MonoBehaviour
         }
     }
 
-    public void save()
+    public void saveGame()
     {
-        string loadedJson = File.ReadAllText(Application.persistentDataPath + "/save.json");
-        scoreBoard loadedData = JsonUtility.FromJson<scoreBoard>(loadedJson);
+        string path = Application.persistentDataPath + "/save.json";
         scoreBoard toSave = new scoreBoard();
-        for (int i = loadedData.scoreStore.Count - 1; i > 0; i--) 
-        { 
-            toSave.scoreStore[i] = loadedData.scoreStore[i-1]; 
+
+        if (File.Exists(path)){
+            print("Helloo");
+            scoreBoard loadedData = JsonUtility.FromJson<scoreBoard>(File.ReadAllText(path));
+            for (int i = loadedData.scoreStore.Count - 1; i > 0; i--) 
+            { 
+                toSave.scoreStore[i] = loadedData.scoreStore[i-1]; 
+            }
+
+            if (score > loadedData.highScoreStore)
+            {
+                toSave.highScoreStore = score;
+            }
+            else
+            {
+                toSave.highScoreStore = loadedData.highScoreStore;
+            }
         }
-        //toSave.scoreStore10 = loadedData.scoreStore9;
-        //toSave.scoreStore9 = loadedData.scoreStore8;
-        //toSave.scoreStore8 = loadedData.scoreStore7;
-        //toSave.scoreStore7 = loadedData.scoreStore6;
-        //toSave.scoreStore6 = loadedData.scoreStore5;
-        //toSave.scoreStore5 = loadedData.scoreStore4;
-        //toSave.scoreStore4 = loadedData.scoreStore3;
-        //toSave.scoreStore3 = loadedData.scoreStore2;
-        //toSave.scoreStore2 = loadedData.scoreStore1;
-        //toSave.scoreStore1 = score;
+        //else
+        /*{
+            for (int i = loadedData.scoreStore.Count - 1; i > 0; i--)
+            {
+                toSave.scoreStore[i] = toSave.scoreStore[i - 1];
+            }
+        }*/
+            //toSave.scoreStore10 = loadedData.scoreStore9;
+            //toSave.scoreStore9 = loadedData.scoreStore8;
+            //toSave.scoreStore8 = loadedData.scoreStore7;
+            //toSave.scoreStore7 = loadedData.scoreStore6;
+            //toSave.scoreStore6 = loadedData.scoreStore5;
+            //toSave.scoreStore5 = loadedData.scoreStore4;
+            //toSave.scoreStore4 = loadedData.scoreStore3;
+            //toSave.scoreStore3 = loadedData.scoreStore2;
+            //toSave.scoreStore2 = loadedData.scoreStore1;
+            //toSave.scoreStore1 = score;
         toSave.scoreStore[0] = score;
-        if (score > loadedData.highScoreStore)
-        {
-            toSave.highScoreStore = score;
-        }
-        else
-        {
-            toSave.highScoreStore = loadedData.highScoreStore;
-        }
-            string jsonData = JsonUtility.ToJson(toSave);
+        
+        string jsonData = JsonUtility.ToJson(toSave);
         File.WriteAllText(Application.persistentDataPath + "/save.json", jsonData);
     }
 
