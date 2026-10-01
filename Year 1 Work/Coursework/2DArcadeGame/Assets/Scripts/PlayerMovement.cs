@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour
 
     InputAction moveAction;
 
+    [SerializeField] InputActionReference moveVerb;
+
+    void OnEnable() => moveVerb.action.Enable();
+    void OnDisable() => moveVerb.action.Disable();
+
     GameObject gameManager;
     private GameManagerCode gameManagerCode;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,7 +38,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody2D>().linearVelocityX = moveInput.x * speed;
+        Vector2 move = moveVerb.action.ReadValue<Vector2>();
+        GetComponent<Rigidbody2D>().linearVelocityX = move.x * speed;
         SetRoation(speed);
     }
 
