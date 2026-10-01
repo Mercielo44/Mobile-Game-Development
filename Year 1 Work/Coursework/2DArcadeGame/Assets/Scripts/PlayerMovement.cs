@@ -3,6 +3,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
     void OnEnable() => moveVerb.action.Enable();
     void OnDisable() => moveVerb.action.Disable();
+
+    const float MinSwipeDp = 50f;
+    const float MaxSwipeTime = 0.4f;
 
     GameObject gameManager;
     private GameManagerCode gameManagerCode;
@@ -41,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = moveVerb.action.ReadValue<Vector2>();
         GetComponent<Rigidbody2D>().linearVelocityX = move.x * speed;
         SetRoation(speed);
+
     }
 
     //void OnMove(InputValue input)
@@ -50,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump()
     {
+        print("jump");
         if (canJump)
         {
             GetComponent<Rigidbody2D>().AddForceY(jumpForce, ForceMode2D.Impulse);
@@ -107,5 +115,22 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation *= currentAngle;
     }
 
+    void CheckSwipe(Touch touch)
+    {
+        if (touch.phase != TouchPhase.Ended) return;
 
-}
+        Vector2 delta = touch.screenPosition - touch.startScreenPosition;
+        float dpi = Screen.dpi > 0 ? Screen.dpi : 160f;
+        float distDp = delta.magnitude / (dpi / 160f);
+        float time = (float)(touch.time - touch.startTime);
+
+        if (distDp < MinSwipeDp || time > MaxSwipeTime) return;
+
+        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+        {
+            OnGFlip();
+        }
+    }
+
+
+    }
