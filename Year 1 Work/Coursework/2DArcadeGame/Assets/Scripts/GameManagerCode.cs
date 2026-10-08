@@ -64,6 +64,11 @@ public class GameManagerCode : MonoBehaviour
         
     }
 
+    void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     private IEnumerator LevelGenerator(bool upsideDown, int initialDelay)
     {
         yield return new WaitForSeconds(initialDelay);
@@ -150,7 +155,6 @@ public class GameManagerCode : MonoBehaviour
         scoreBoard toSave = new scoreBoard();
 
         if (File.Exists(path)){
-            print("Helloo");
             scoreBoard loadedData = JsonUtility.FromJson<scoreBoard>(File.ReadAllText(path));
             for (int i = loadedData.scoreStore.Count - 1; i > 0; i--) 
             { 

@@ -2,8 +2,9 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
@@ -24,8 +25,11 @@ public class PlayerMovement : MonoBehaviour
     void OnEnable() => moveVerb.action.Enable();
     void OnDisable() => moveVerb.action.Disable();
 
-    const float MinSwipeDp = 50f;
-    const float MaxSwipeTime = 0.4f;
+    const float MinSwipeDp = 15f;
+    const float MaxSwipeTime = 0.075f;
+
+    private Vector2 initialMousePosition;
+    private float initialTouchTime;
 
     GameObject gameManager;
     private GameManagerCode gameManagerCode;
@@ -55,9 +59,8 @@ public class PlayerMovement : MonoBehaviour
     //   moveInput = input.Get<Vector2>();
     //}
 
-    void OnJump()
+    public void OnJump(InputAction.CallbackContext context)
     {
-        print("jump");
         if (canJump)
         {
             GetComponent<Rigidbody2D>().AddForceY(jumpForce, ForceMode2D.Impulse);
@@ -110,27 +113,45 @@ public class PlayerMovement : MonoBehaviour
     private void SetRoation(float currentSpeed)
     {
         float diameter = GetComponent<Collider2D>().bounds.size.y;
-        float angleCalc = (currentSpeed/ (Mathf.PI * diameter)) * roationDirectionMultiplier;
+        float angleCalc = (currentSpeed / (Mathf.PI * diameter)) * roationDirectionMultiplier;
         Quaternion currentAngle = Quaternion.identity * Quaternion.AngleAxis(angleCalc, Vector3.forward);
         transform.rotation *= currentAngle;
     }
 
-    void CheckSwipe(Touch touch)
+    public void OnCheckSwipe(InputAction.CallbackContext context)
     {
-        if (touch.phase != TouchPhase.Ended) return;
-
-        Vector2 delta = touch.screenPosition - touch.startScreenPosition;
-        float dpi = Screen.dpi > 0 ? Screen.dpi : 160f;
-        float distDp = delta.magnitude / (dpi / 160f);
-        float time = (float)(touch.time - touch.startTime);
-
-        if (distDp < MinSwipeDp || time > MaxSwipeTime) return;
-
-        if (distDp >= 50f && time <= 0.4f)
+        if (context.ReadValue<float>() > 0.5f)
         {
-            OnGFlip();
+            initialMousePosition = ((Pointer)context.control.device).position.ReadValue();
+            initialTouchTime = Time.time;
+            return;
+        }
+        if (context.ReadValue<float>() < 0.5f)
+        {
+            float time = Time.time - initialTouchTime;
+ 
+            if (time < MaxSwipeTime && canJump)
+            {
+                print("Jump");
+                GetComponent<Rigidbody2D>().AddForceY(jumpForce, ForceMode2D.Impulse);
+                canJump = false;
+                return;
+            }
+
+
+            Vector2 delta = ((Pointer)context.control.device).position.ReadValue() - initialMousePosition;
+            float dpi = Screen.dpi > 0 ? Screen.dpi : 160f;
+            float distDp = delta.magnitude / (dpi / 160f);
+
+            print("MinDist");
+            if (distDp < MinSwipeDp) return;
+
+            if (distDp >= 50f && time <= 0.4f)
+            {
+                print("GFLIP");
+                OnGFlip();
+            }
         }
     }
 
-
-    }
+}

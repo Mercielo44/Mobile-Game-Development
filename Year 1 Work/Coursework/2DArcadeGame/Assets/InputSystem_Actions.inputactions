@@ -53,12 +53,12 @@
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
-                    "expectedControlType": "",
+                    "expectedControlType": "Touch",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Previous",
@@ -91,6 +91,15 @@
                     "name": "GFlip",
                     "type": "Button",
                     "id": "9c9b3815-335b-4847-9345-74923b167bd4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CheckSwipe",
+                    "type": "Button",
+                    "id": "ee4bfd42-726c-4b8f-9250-b94aefb59d2b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -398,10 +407,10 @@
                 {
                     "name": "",
                     "id": "c75018ff-eda7-4ad9-8fab-2d031df08d4f",
-                    "path": "<Touchscreen>/touch0/tap",
+                    "path": "<Pointer>/press",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Touch",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -491,6 +500,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "GFlip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "092e5075-68c6-4907-9a59-513e70036772",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "CheckSwipe",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
