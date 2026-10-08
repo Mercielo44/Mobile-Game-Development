@@ -55,6 +55,7 @@ public class GameManagerCode : MonoBehaviour
         StartCoroutine(LevelGenerator(true, 2));
         StartCoroutine(FloorGenerator(false, 2f));
         StartCoroutine(FloorGenerator(true, 4f));
+        Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
     // Update is called once per frame

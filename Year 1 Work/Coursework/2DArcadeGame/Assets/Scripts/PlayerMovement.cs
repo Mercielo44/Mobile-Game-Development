@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (distDp < MinSwipeDp || time > MaxSwipeTime) return;
 
-        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+        if (distDp >= 50f && time <= 0.4f)
         {
             OnGFlip();
         }
