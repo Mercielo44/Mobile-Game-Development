@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     void OnDisable() => moveVerb.action.Disable();
 
     const float MinSwipeDp = 15f;
-    const float MaxSwipeTime = 0.075f;
+    const float MaxSwipeTime = 0.1f;
 
     private Vector2 initialMousePosition;
     private float initialTouchTime;
