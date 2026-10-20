@@ -4,3 +4,4 @@ jakeboygamer64 (2025) Trying to create Ray-cast Suspension; Editable, Open, Stab
 
 AxiomaticUncertainty (2020) Unity HOVERCAR Tutorial. Available at: https://youtu.be/qsfIXopyYHY [Accessed 20/10/2026]
 
+Unain (2015) [Unreal Engine 4.7+] Hover Vehicle Blueprint Tutorial. Available at: https://www.youtube.com/watch?v=cPVaDndT7tY [Accessed 20/10/2026]
