@@ -9,6 +9,7 @@ public class HovercarController : MonoBehaviour
     public Rigidbody rb;
     public GameObject prop;
     public GameObject HovercarCenterOfMass;
+    public float springLength;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,9 +23,9 @@ public class HovercarController : MonoBehaviour
         foreach (GameObject spring in springs)
         {
             RaycastHit hit;
-            if (Physics.Raycast(spring.transform.position, transform.TransformDirection(Vector3.down), out hit, 3f))
+            if (Physics.Raycast(spring.transform.position, transform.TransformDirection(Vector3.down), out hit, springLength))
             {
-                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.up)*Mathf.Pow(3f- hit.distance, 2)/3f*250f, spring.transform.position);
+                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.up)*Mathf.Pow(springLength- hit.distance, 2)/3f*250f, spring.transform.position);
             }
         }
     }
