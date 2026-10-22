@@ -27,8 +27,8 @@ public class HovercarController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(spring.transform.position, transform.TransformDirection(Vector3.down), out hit, springLength))
             {
-                rb.AddForceAtPosition((Time.deltaTime * transform.TransformDirection(Vector3.up) * Mathf.Pow(((springLength - hit.distance)*springConstant)+rb.mass, 2)), spring.transform.position);
-                //print(Time.deltaTime * transform.TransformDirection(Vector3.up) * (Mathf.Pow((springConstant * (springLength - hit.distance)), 2)));
+                rb.AddForceAtPosition((Time.deltaTime * transform.TransformDirection(Vector3.up) * Mathf.Pow(((springLength - hit.distance)*springConstant), 2)), spring.transform.position);
+                //print(Time.deltaTime * transform.TransformDirection(Vector3.up) * (*Mathf.Pow(springLength- hit.distance, 2)/3f*250f);
                 print(hit.distance);
             }
         }
