@@ -559,7 +559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2571621086165778769, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 5.61
       objectReference: {fileID: 0}
     - target: {fileID: 2571621086165778769, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -598,8 +598,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4860613427667266689, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
+      propertyPath: springDamping
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860613427667266689, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: springConstant
       value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860613427667266689, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
+      propertyPath: springDamingSensitivity
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6592425685124027761, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: m_Mass
@@ -608,6 +616,10 @@ PrefabInstance:
     - target: {fileID: 6592425685124027761, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: m_LinearDamping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592425685124027761, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
+      propertyPath: m_AngularDamping
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7967039186705712164, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: m_Name
