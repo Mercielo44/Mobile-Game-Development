@@ -9,4 +9,7 @@ Unain (2015) [Unreal Engine 4.7+] Hover Vehicle Blueprint Tutorial. Available at
 Pikuu (2025) Use of unassigned local variable in Unity. Available at: https://stackoverflow.com/questions/31270329/use-of-unassigned-local-variable-in-unity [Accessed 26/10/2026]
 
 Simon Lee (2022) Car Suspension Unity Simple Tutoiral. Available at: https://www.youtube.com/watch?v=239_6ra2V3w [Accessed 26/10/2026]
+
 Convert Units (N/A) Convert kg to n - Conversion of Measurement Units. Avaiable at: https://www.convertunits.com/from/kg/to/n [Accessed 27/10/2026]
+
+Toyful Games (2022) Making Custom Car Physics in Unity (for Very Very Valet). Available at: https://www.youtube.com/watch?v=CdPYlj5uZeI [Accessed 28/10/2026]

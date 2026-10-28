@@ -599,7 +599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4860613427667266689, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: springDamping
-      value: 100
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4860613427667266689, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: springConstant
