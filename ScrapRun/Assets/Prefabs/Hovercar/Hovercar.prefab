@@ -402,7 +402,8 @@ MonoBehaviour:
   rb: {fileID: 6592425685124027761}
   prop: {fileID: 1456265078108526009}
   HovercarCenterOfMass: {fileID: 6300118501375504865}
-  springLength: 2
+  springLength: 1.5
+  speed: 100
 --- !u!54 &6592425685124027761
 Rigidbody:
   m_ObjectHideFlags: 0
