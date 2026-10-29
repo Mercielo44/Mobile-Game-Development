@@ -33,7 +33,7 @@ public class HovercarController : MonoBehaviour
     void Start()
     {
         rb.centerOfMass = HovercarCenterOfMass.transform.localPosition;
-
+        rb.linearVelocity = new Vector3(0, 0, 100);
     }
 
     // FixedUpdate is called at fixed intervals during unity's physics update loop
