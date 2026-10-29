@@ -39,7 +39,8 @@ public class HovercarController : MonoBehaviour
     // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
-
+        rb.AddForce(transform.right*(rb.mass*(100+2.041f)));
+        print(rb.linearVelocity.x);
         for (int i = 0; i < springs.Count; i++)
         {
             RaycastHit hit;
