@@ -15,10 +15,11 @@ public class HovercarController : MonoBehaviour
     public float springConstant;
     public float springDamping;
     public float springDamingSensitivity;
-    float[] deltaLength = new float[4];
+    float[] deltaLength;
 
     private void Awake()
     {
+        deltaLength = new float[springs.Count];
         for (int i = 0; i < springs.Count; i++) { deltaLength[i] = springLength; }
     }
 
@@ -35,13 +36,13 @@ public class HovercarController : MonoBehaviour
         for (int i = 0; i < springs.Count; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(springs[i].transform.position, transform.TransformDirection(Vector3.down), out hit, springLength+0.25f))
+            if (Physics.Raycast(springs[i].transform.position, transform.TransformDirection(Vector3.down), out hit, springLength+0.1f))
             {
                 //rb.AddForceAtPosition(Time.deltaTime*());
-                rb.AddForceAtPosition((Time.fixedTime* ((transform.up * Mathf.Lerp(((rb.mass*rb.mass* 9.81f)/ Time.fixedTime) *Mathf.Clamp((springLength - hit.distance),0,springLength), 0, hit.distance/springLength) - (transform.up * Mathf.Clamp(rb.linearVelocity.y * springDamingSensitivity, 0, springDamping))))), springs[i].transform.position);
+                rb.AddForceAtPosition((Time.fixedDeltaTime * (((transform.up * (((rb.mass)* 9.81f)/ Time.fixedDeltaTime) *Mathf.Clamp(((springLength+0.25f) - hit.distance),0,springLength)) - (transform.up * ((((hit.distance-deltaLength[i])/Time.fixedDeltaTime) * (rb.mass*2)) / Time.fixedDeltaTime))))), springs[i].transform.position);
                 //rb.AddForceAtPosition((Time.deltaTime * (((transform.TransformDirection(Vector3.up) * (((Mathf.Clamp(springLength - hit.distance, 0, springLength)) * springConstant) + (rb.mass / Time.deltaTime))) + (transform.up * Mathf.Clamp((deltaLength[i] - hit.distance) * springDamingSensitivity, 0, springDamping))))), springs[i].transform.position);
                 //print(Time.deltaTime * ((transform.up * Mathf.Lerp(((rb.mass * 9.8066500286389f) / Time.deltaTime) * (Mathf.Clamp(springLength - hit.distance, 0, springLength)), 0, hit.distance / springLength) + (-1 *transform.up * Mathf.Clamp((hit.distance - deltaLength[i]) * springDamingSensitivity, 0, springDamping)))));
-                deltaLength[i] = springLength - hit.distance;
+                deltaLength[i] = hit.distance;
                 print(hit.distance);
             }
         }
