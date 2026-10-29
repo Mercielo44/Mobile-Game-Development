@@ -18,6 +18,8 @@ public class HovercarController : MonoBehaviour
     float springDamping;
     float[] deltaLength;
 
+    public float speed;
+
     private void Awake()
     {
         // variables that don't need to be repeatedly set
@@ -33,13 +35,14 @@ public class HovercarController : MonoBehaviour
     void Start()
     {
         rb.centerOfMass = HovercarCenterOfMass.transform.localPosition;
-
+        rb.linearVelocity = new Vector3(0, 0, speed);
     }
 
     // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
-
+        rb.AddForce(transform.forward*(rb.mass*(speed + 2.041f)));
+        print(rb.linearVelocity.z);
         for (int i = 0; i < springs.Count; i++)
         {
             RaycastHit hit;
