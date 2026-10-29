@@ -595,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4860613427667266689, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: springLength
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4860613427667266689, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: springDamping
@@ -607,7 +607,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4860613427667266689, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: springDamingSensitivity
-      value: 1000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6592425685124027761, guid: 12c9ba3c9b16afc46861bbacf5f15cfc, type: 3}
       propertyPath: m_Mass

@@ -12,15 +12,21 @@ public class HovercarController : MonoBehaviour
     public GameObject prop;
     public GameObject HovercarCenterOfMass;
     public float springLength;
-    public float springConstant;
-    public float springDamping;
-    public float springDamingSensitivity;
+    float raycastLengthDraw;
+    float raycastLengthPadded;
+    float springConstant;
+    float springDamping;
     float[] deltaLength;
 
     private void Awake()
     {
+        // variables that don't need to be repeatedly set
         deltaLength = new float[springs.Count];
         for (int i = 0; i < springs.Count; i++) { deltaLength[i] = springLength; }
+        raycastLengthPadded = springLength + 0.25f;
+        raycastLengthDraw = springLength+0.1f;
+        springDamping = (rb.mass * 2);
+        springConstant = (rb.mass * 9.81f);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,20 +36,18 @@ public class HovercarController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
+
         for (int i = 0; i < springs.Count; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(springs[i].transform.position, transform.TransformDirection(Vector3.down), out hit, springLength+0.1f))
+            if (Physics.Raycast(springs[i].transform.position, transform.TransformDirection(Vector3.down), out hit, raycastLengthDraw))
             {
-                //rb.AddForceAtPosition(Time.deltaTime*());
-                rb.AddForceAtPosition((Time.fixedDeltaTime * (((transform.up * (((rb.mass)* 9.81f)/ Time.fixedDeltaTime) *Mathf.Clamp(((springLength+0.25f) - hit.distance),0,springLength)) - (transform.up * ((((hit.distance-deltaLength[i])/Time.fixedDeltaTime) * (rb.mass*2)) / Time.fixedDeltaTime))))), springs[i].transform.position);
-                //rb.AddForceAtPosition((Time.deltaTime * (((transform.TransformDirection(Vector3.up) * (((Mathf.Clamp(springLength - hit.distance, 0, springLength)) * springConstant) + (rb.mass / Time.deltaTime))) + (transform.up * Mathf.Clamp((deltaLength[i] - hit.distance) * springDamingSensitivity, 0, springDamping))))), springs[i].transform.position);
-                //print(Time.deltaTime * ((transform.up * Mathf.Lerp(((rb.mass * 9.8066500286389f) / Time.deltaTime) * (Mathf.Clamp(springLength - hit.distance, 0, springLength)), 0, hit.distance / springLength) + (-1 *transform.up * Mathf.Clamp((hit.distance - deltaLength[i]) * springDamingSensitivity, 0, springDamping)))));
+                // Spring Force = (spring rate(mass in newtons) * current spring length) - (spring speed ((current spring length - spring length of previous interval) / refresh rate) * damping (mass doubled))
+                rb.AddForceAtPosition(((((transform.up * (springConstant) *Mathf.Clamp(((raycastLengthPadded) - hit.distance),0,springLength)) - (transform.up * ((((hit.distance-deltaLength[i])/Time.fixedDeltaTime) * (springDamping))))))), springs[i].transform.position);
                 deltaLength[i] = hit.distance;
-                print(hit.distance);
             }
         }
     }
