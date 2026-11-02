@@ -1,0 +1,132 @@
+{
+    "version": 1,
+    "name": "PersonalInputSystem",
+    "maps": [
+        {
+            "name": "Steer",
+            "id": "e37c9ae0-1d89-46cf-b8b4-ec6e78dd0968",
+            "actions": [
+                {
+                    "name": "Steerin (Keyboard)",
+                    "type": "Value",
+                    "id": "40da5b08-fc85-4951-9a5c-a96da9b852f4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Steering (Mobile-Gyro)",
+                    "type": "Button",
+                    "id": "44ed086d-8f2a-4a44-bacd-5020ebb5ca0e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis (Arrow Keys)",
+                    "id": "67c638f7-262d-4554-9f8d-812b0ff86cd5",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steerin (Keyboard)",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "f5f841af-f5ed-4ffc-84d4-4e217176d347",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steerin (Keyboard)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "716725ef-6bca-4453-ae0f-c260bbac8ac0",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steerin (Keyboard)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis (AD)",
+                    "id": "b59a3119-3d16-47a1-a19b-5ea6c80143fb",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steerin (Keyboard)",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "4388c64c-19e1-4ff4-a4ef-19b4e59648b0",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steerin (Keyboard)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "37fe8e48-bb23-4374-9a2b-d752309aa8d7",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steerin (Keyboard)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "d5a1eadf-baf0-40f7-8846-cec83c535df7",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering (Mobile-Gyro)",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "989139a3-c46b-4203-bba0-33ab91b7a498",
+                    "path": "<TrackedDevice>/deviceRotation/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering (Mobile-Gyro)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "cbada672-5e39-4917-8de9-6b0396b8f72e",
+                    "path": "<TrackedDevice>/deviceRotation/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering (Mobile-Gyro)",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
