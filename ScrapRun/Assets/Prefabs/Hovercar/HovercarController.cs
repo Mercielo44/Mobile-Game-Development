@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -19,6 +20,8 @@ public class HovercarController : MonoBehaviour
     float[] deltaLength;
 
     public float speed;
+    public float steerSpeed;
+    public PlayerInput Input;
 
     private void Awake()
     {
@@ -42,7 +45,7 @@ public class HovercarController : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddForce(transform.forward*(rb.mass*(speed + 2.041f)));
-        print(rb.linearVelocity.z);
+        //print(rb.linearVelocity.z);
         for (int i = 0; i < springs.Count; i++)
         {
             RaycastHit hit;
@@ -54,4 +57,16 @@ public class HovercarController : MonoBehaviour
             }
         }
     }
+
+    public void OnSteerButton()
+    {
+        rb.linearVelocity = new Vector3 (steerSpeed,0,0);
+    }
+
+    public void OnSteerAnalogue(float currentInput)
+    {
+        rb.linearVelocity = new Vector3((steerSpeed* Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>()), 0, 0); //Adding the velocity to go left or right
+        Debug.Log(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+    }
+
 }

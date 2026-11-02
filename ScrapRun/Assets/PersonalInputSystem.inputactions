@@ -3,14 +3,14 @@
     "name": "PersonalInputSystem",
     "maps": [
         {
-            "name": "Steer",
+            "name": "Gameplay",
             "id": "e37c9ae0-1d89-46cf-b8b4-ec6e78dd0968",
             "actions": [
                 {
-                    "name": "Steerin (Keyboard)",
+                    "name": "Steering(Keyboard)",
                     "type": "Value",
                     "id": "40da5b08-fc85-4951-9a5c-a96da9b852f4",
-                    "expectedControlType": "",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -33,7 +33,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Steerin (Keyboard)",
+                    "action": "Steering(Keyboard)",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -44,7 +44,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Steerin (Keyboard)",
+                    "action": "Steering(Keyboard)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -55,7 +55,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Steerin (Keyboard)",
+                    "action": "Steering(Keyboard)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -66,7 +66,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Steerin (Keyboard)",
+                    "action": "Steering(Keyboard)",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -77,7 +77,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Steerin (Keyboard)",
+                    "action": "Steering(Keyboard)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -88,7 +88,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Steerin (Keyboard)",
+                    "action": "Steering(Keyboard)",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
