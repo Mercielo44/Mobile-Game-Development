@@ -108,7 +108,7 @@
                 {
                     "name": "negative",
                     "id": "989139a3-c46b-4203-bba0-33ab91b7a498",
-                    "path": "<TrackedDevice>/deviceRotation/z",
+                    "path": "<TrackedDevice>/deviceRotation/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -119,7 +119,7 @@
                 {
                     "name": "positive",
                     "id": "cbada672-5e39-4917-8de9-6b0396b8f72e",
-                    "path": "<TrackedDevice>/deviceRotation/z",
+                    "path": "<TrackedDevice>/deviceRotation/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

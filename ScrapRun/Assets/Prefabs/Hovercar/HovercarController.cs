@@ -1,10 +1,11 @@
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HovercarController : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class HovercarController : MonoBehaviour
     //bool isSteering;
     public PlayerInput Input;
     public float steerSensitivity;
+    float currentRotation;
+    public TextMeshProUGUI velocityText;
 
     private void Awake()
     {
@@ -45,12 +48,16 @@ public class HovercarController : MonoBehaviour
     {
         rb.centerOfMass = HovercarCenterOfMass.transform.localPosition;
         rb.linearVelocity = new Vector3(0, 0, speed);
+        OnEnableGyro();
+        currentRotation = UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue();
     }
 
     // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
+        OnSteerAnalogue();
         rb.AddForce(steerInput,rb.linearVelocity.y,(rb.mass*(speed + 2.041f)));
+        velocityText.text = rb.linearVelocity.ToString();
         //print(rb.linearVelocity.z);
         for (int i = 0; i < springs.Count; i++)
         {
@@ -72,8 +79,18 @@ public class HovercarController : MonoBehaviour
 
     public void OnSteerAnalogue()
     {
-        steerInput = (steerSpeed* Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>()); //Adding the velocity to go left or right
-        Debug.Log(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+        steerInput = (steerSpeed* (Mathf.Clamp(UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() - currentRotation, -8,8)/8)); //Adding the velocity to go left or right
+        Debug.Log(UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() + currentRotation);
+    }
+
+    private void OnEnableGyro()
+    {
+        InputSystem.EnableDevice(UnityEngine.InputSystem.GravitySensor.current);
+    }
+
+    private void OnDisableGyro()
+    {
+        InputSystem.DisableDevice(UnityEngine.InputSystem.GravitySensor.current);
     }
 
 }
