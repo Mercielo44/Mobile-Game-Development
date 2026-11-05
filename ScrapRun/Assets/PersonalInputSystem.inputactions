@@ -13,16 +13,18 @@
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": true,
+                    "priority": 0
                 },
                 {
                     "name": "Steering (Mobile-Gyro)",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "44ed086d-8f2a-4a44-bacd-5020ebb5ca0e",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true,
+                    "priority": 0
                 }
             ],
             "bindings": [

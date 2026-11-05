@@ -582,7 +582,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1109886315}
         m_TargetAssemblyTypeName: HovercarController, Assembly-CSharp
         m_MethodName: OnSteerAnalogue
-        m_Mode: 4
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -594,7 +594,19 @@ MonoBehaviour:
     m_ActionId: 40da5b08-fc85-4951-9a5c-a96da9b852f4
     m_ActionName: 'Gameplay/Steerin (Keyboard)[/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1109886315}
+        m_TargetAssemblyTypeName: HovercarController, Assembly-CSharp
+        m_MethodName: OnSteerButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 44ed086d-8f2a-4a44-bacd-5020ebb5ca0e
     m_ActionName: Gameplay/Steering (Mobile-Gyro)
   m_NeverAutoSwitchControlSchemes: 0
