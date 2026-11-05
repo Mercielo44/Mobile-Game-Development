@@ -37,6 +37,7 @@ public class HovercarController : MonoBehaviour
         raycastLengthDraw = springLength+0.1f;
         springDamping = (rb.mass * 2);
         springConstant = (rb.mass * 9.81f);
+        steerSpeed*=rb.mass;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -49,8 +50,7 @@ public class HovercarController : MonoBehaviour
     // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(steerInput, rb.linearVelocity.y, rb.linearVelocity.z);
-        rb.AddForce(transform.forward*(rb.mass*(speed + 2.041f)));
+        rb.AddForce(steerInput,rb.linearVelocity.y,(rb.mass*(speed + 2.041f)));
         //print(rb.linearVelocity.z);
         for (int i = 0; i < springs.Count; i++)
         {
