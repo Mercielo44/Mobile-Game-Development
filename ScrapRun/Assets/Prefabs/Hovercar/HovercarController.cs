@@ -21,6 +21,8 @@ public class HovercarController : MonoBehaviour
 
     public float speed;
     public float steerSpeed;
+    Vector3 steerVector;
+    bool isSteering;
     public PlayerInput Input;
 
     private void Awake()
@@ -44,6 +46,7 @@ public class HovercarController : MonoBehaviour
     // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
+        rb.linearVelocity = steerVector;
         rb.AddForce(transform.forward*(rb.mass*(speed + 2.041f)));
         //print(rb.linearVelocity.z);
         for (int i = 0; i < springs.Count; i++)
@@ -60,12 +63,13 @@ public class HovercarController : MonoBehaviour
 
     public void OnSteerButton()
     {
-        rb.linearVelocity = new Vector3 (steerSpeed,0,0);
+        steerVector = new Vector3 ((steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>()), 0,0);
+        isSteering = true;
     }
 
-    public void OnSteerAnalogue(float currentInput)
+    public void OnSteerAnalogue()
     {
-        rb.linearVelocity = new Vector3((steerSpeed* Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>()), 0, 0); //Adding the velocity to go left or right
+        steerVector = new Vector3((steerSpeed* Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>()), 0, 0); //Adding the velocity to go left or right
         Debug.Log(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
     }
 
