@@ -404,6 +404,11 @@ MonoBehaviour:
   HovercarCenterOfMass: {fileID: 6300118501375504865}
   springLength: 1.5
   speed: 100
+  steerSpeed: 15
+  Input: {fileID: 0}
+  steerSensitivity: 0
+  steerDamping: 3
+  velocityText: {fileID: 0}
 --- !u!54 &6592425685124027761
 Rigidbody:
   m_ObjectHideFlags: 0

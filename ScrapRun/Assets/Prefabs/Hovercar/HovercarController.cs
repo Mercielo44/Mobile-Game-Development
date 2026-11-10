@@ -25,9 +25,10 @@ public class HovercarController : MonoBehaviour
     public float speed;
     public float steerSpeed;
     float steerInput;
-    //bool isSteering;
+    bool isSteering;
     public PlayerInput Input;
     public float steerSensitivity;
+    public float steerDamping;
     float currentRotation;
     public TextMeshProUGUI velocityText;
 
@@ -41,6 +42,8 @@ public class HovercarController : MonoBehaviour
         springDamping = (rb.mass * 2);
         springConstant = (rb.mass * 9.81f);
         steerSpeed*=rb.mass;
+        steerDamping *= rb.mass;
+        isSteering = false;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -56,9 +59,16 @@ public class HovercarController : MonoBehaviour
     void FixedUpdate()
     {
         //OnSteerAnalogue();
-        rb.AddForce(steerInput,rb.linearVelocity.y,(rb.mass*(speed + 2.041f)));
-        velocityText.text = rb.linearVelocity.ToString();
-        //print(rb.linearVelocity.z);
+        if (Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>()!=0)
+        {
+            rb.AddForce(steerInput, 0, (rb.mass * (speed + 2.041f)));
+        }
+        else
+        {
+            rb.AddForce(-rb.linearVelocity.x*steerDamping, 0, (rb.mass * (speed + 2.041f)));
+        }
+            velocityText.text = rb.linearVelocity.ToString();
+        print(rb.linearVelocity.z);
         for (int i = 0; i < springs.Count; i++)
         {
             RaycastHit hit;
@@ -74,7 +84,7 @@ public class HovercarController : MonoBehaviour
     public void OnSteerButton()
     {
         steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
-        //isSteering = true;
+        isSteering = true;
     }
 
     public void OnSteerAnalogue()
@@ -86,6 +96,7 @@ public class HovercarController : MonoBehaviour
     private void OnEnableGyro()
     {
         InputSystem.EnableDevice(UnityEngine.InputSystem.GravitySensor.current);
+        isSteering = true;
     }
 
     private void OnDisableGyro()
