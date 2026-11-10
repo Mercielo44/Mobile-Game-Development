@@ -14,13 +14,13 @@ public class xCoordinateDisplayCode : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentRotation = UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue();
+        //currentRotation = UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue();
     }
 
     // Update is called once per frame
     void Update()
     {
         //coordinateText.text = Player.transform.position.x.ToString();
-        rotationText.text = (UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue()-currentRotation).ToString();
+        //rotationText.text = (UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue()-currentRotation).ToString();
     }
 }

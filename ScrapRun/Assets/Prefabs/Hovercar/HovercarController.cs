@@ -55,7 +55,7 @@ public class HovercarController : MonoBehaviour
     // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
-        OnSteerAnalogue();
+        //OnSteerAnalogue();
         rb.AddForce(steerInput,rb.linearVelocity.y,(rb.mass*(speed + 2.041f)));
         velocityText.text = rb.linearVelocity.ToString();
         //print(rb.linearVelocity.z);
