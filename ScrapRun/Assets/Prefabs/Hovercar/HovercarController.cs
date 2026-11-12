@@ -58,17 +58,12 @@ public class HovercarController : MonoBehaviour
     // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
-        //OnSteerAnalogue();
-        if (Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>()!=0)
-        {
-            rb.AddForce(steerInput, 0, (rb.mass * (speed + 2.041f)));
-        }
-        else
+        rb.AddForce(steerInput, 0, (rb.mass * (speed + 2.041f)));
+        if (Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>() == 0 || UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() - currentRotation == 0)
         {
             rb.AddForce(-rb.linearVelocity.x*steerDamping, 0, (rb.mass * (speed + 2.041f)));
         }
-            velocityText.text = rb.linearVelocity.ToString();
-        print(rb.linearVelocity.z);
+
         for (int i = 0; i < springs.Count; i++)
         {
             RaycastHit hit;
@@ -89,8 +84,7 @@ public class HovercarController : MonoBehaviour
 
     public void OnSteerAnalogue()
     {
-        steerInput = (steerSpeed* (Mathf.Clamp(UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() - currentRotation, -8,8)/8)); //Adding the velocity to go left or right
-        Debug.Log(UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() + currentRotation);
+        steerInput = (-1* steerSpeed* (Mathf.Clamp(UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() - currentRotation, -8,8)/8)); //Adding the velocity to go left or right
     }
 
     private void OnEnableGyro()
