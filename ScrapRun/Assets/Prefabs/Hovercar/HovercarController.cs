@@ -1,12 +1,16 @@
 using NUnit.Framework;
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HovercarController : MonoBehaviour
 {
+    // GameManager GameManager
+
     public List<GameObject> springs;
     public Rigidbody rb;
     public GameObject prop;
@@ -19,6 +23,14 @@ public class HovercarController : MonoBehaviour
     float[] deltaLength;
 
     public float speed;
+    public float steerSpeed;
+    float steerInput;
+    bool isSteering;
+    public PlayerInput Input;
+    public float steerSensitivity;
+    public float steerDamping;
+    float currentRotation;
+    public TextMeshProUGUI velocityText;
 
     private void Awake()
     {
@@ -29,6 +41,9 @@ public class HovercarController : MonoBehaviour
         raycastLengthDraw = springLength+0.1f;
         springDamping = (rb.mass * 2);
         springConstant = (rb.mass * 9.81f);
+        steerSpeed*=rb.mass;
+        steerDamping *= rb.mass;
+        isSteering = false;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,12 +51,23 @@ public class HovercarController : MonoBehaviour
     {
         rb.centerOfMass = HovercarCenterOfMass.transform.localPosition;
         rb.linearVelocity = new Vector3(0, 0, speed);
+        OnEnableGyro();
+        currentRotation = UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue();
     }
 
     // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
-        rb.AddForce(transform.forward*(rb.mass*(speed + 2.041f)));
+        //OnSteerAnalogue();
+        if (Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>()!=0)
+        {
+            rb.AddForce(steerInput, 0, (rb.mass * (speed + 2.041f)));
+        }
+        else
+        {
+            rb.AddForce(-rb.linearVelocity.x*steerDamping, 0, (rb.mass * (speed + 2.041f)));
+        }
+            velocityText.text = rb.linearVelocity.ToString();
         print(rb.linearVelocity.z);
         for (int i = 0; i < springs.Count; i++)
         {
@@ -54,4 +80,28 @@ public class HovercarController : MonoBehaviour
             }
         }
     }
+
+    public void OnSteerButton()
+    {
+        steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+        isSteering = true;
+    }
+
+    public void OnSteerAnalogue()
+    {
+        steerInput = (steerSpeed* (Mathf.Clamp(UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() - currentRotation, -8,8)/8)); //Adding the velocity to go left or right
+        Debug.Log(UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() + currentRotation);
+    }
+
+    private void OnEnableGyro()
+    {
+        InputSystem.EnableDevice(UnityEngine.InputSystem.GravitySensor.current);
+        isSteering = true;
+    }
+
+    private void OnDisableGyro()
+    {
+        InputSystem.DisableDevice(UnityEngine.InputSystem.GravitySensor.current);
+    }
+
 }
