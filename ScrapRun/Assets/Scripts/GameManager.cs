@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject player;
     public GameObject[] segments;
     int segementNum;
 
@@ -28,7 +27,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            spawnObstacle(player.transform.position.z + zPos);
+            spawnObstacle(HovercarController.instance.transform.position.z + zPos);
             yield return new WaitForSeconds(3);
         }
     }

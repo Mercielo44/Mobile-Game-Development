@@ -11,10 +11,12 @@ public class HovercarController : MonoBehaviour
 {
     // GameManager GameManager
 
+    public static HovercarController instance;
     public List<GameObject> springs;
     public Rigidbody rb;
     public GameObject prop;
     public GameObject HovercarCenterOfMass;
+    public Camera hoverCamera;
     public float springLength;
     float raycastLengthDraw;
     float raycastLengthPadded;
@@ -32,9 +34,17 @@ public class HovercarController : MonoBehaviour
     float currentRotation;
     public TextMeshProUGUI velocityText;
 
+    private Vector3 hoverCameraOffset;
+
     private void Awake()
     {
         // variables that don't need to be repeatedly set
+        if (instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
         deltaLength = new float[springs.Count];
         for (int i = 0; i < springs.Count; i++) { deltaLength[i] = springLength; }
         raycastLengthPadded = springLength + 0.25f;
@@ -44,6 +54,7 @@ public class HovercarController : MonoBehaviour
         steerSpeed*=rb.mass;
         steerDamping *= rb.mass;
         isSteering = false;
+        hoverCameraOffset = hoverCamera.transform.position - transform.position;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,16 +75,23 @@ public class HovercarController : MonoBehaviour
             rb.AddForce(-rb.linearVelocity.x*steerDamping, 0, (rb.mass * (speed + 2.041f)));
         }
 
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.025f);
+
         for (int i = 0; i < springs.Count; i++)
         {
             RaycastHit hit;
             if (Physics.Raycast(springs[i].transform.position, transform.TransformDirection(Vector3.down), out hit, raycastLengthDraw))
             {
                 // Spring Force = (spring rate(mass in newtons) * current spring length) - (spring speed ((current spring length - spring length of previous interval) / refresh rate) * damping (mass doubled))
-                rb.AddForceAtPosition(((((transform.up * (springConstant) *Mathf.Clamp(((raycastLengthPadded) - hit.distance),0,springLength)) - (transform.up * ((((hit.distance-deltaLength[i])/Time.fixedDeltaTime) * (springDamping))))))), springs[i].transform.position);
+                rb.AddForceAtPosition(((((transform.up * (springConstant) *Mathf.Clamp(((raycastLengthPadded) - hit.distance),0,springLength)) - (transform.up * (((Mathf.Clamp((hit.distance-deltaLength[i]), -springLength, 0)/Time.fixedDeltaTime) * (springDamping))))))), springs[i].transform.position);
                 deltaLength[i] = hit.distance;
             }
         }
+    }
+    //on render fps
+    private void Update()
+    {
+        hoverCamera.transform.position = transform.position + hoverCameraOffset;
     }
 
     public void OnSteerButton()
@@ -84,7 +102,7 @@ public class HovercarController : MonoBehaviour
 
     public void OnSteerAnalogue()
     {
-        steerInput = (-1* steerSpeed* (Mathf.Clamp(UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() - currentRotation, -8,8)/8)); //Adding the velocity to go left or right
+        steerInput = (-1* steerSpeed* (Mathf.Clamp(UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() - currentRotation, -8,8)/4)); //Adding the velocity to go left or right
     }
 
     private void OnEnableGyro()

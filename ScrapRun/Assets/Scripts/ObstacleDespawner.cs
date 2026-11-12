@@ -17,7 +17,7 @@ public class ObstacleDespawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Obstacle")
+        if(other.CompareTag("Obstacle"))
         {
             Destroy(other.transform.parent.gameObject);
         }
