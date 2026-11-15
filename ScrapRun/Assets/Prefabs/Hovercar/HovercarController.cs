@@ -27,7 +27,7 @@ public class HovercarController : MonoBehaviour
     public float speed;
     public float steerSpeed;
     float steerInput;
-    bool isSteering;
+    bool isGryoSteering;
     public PlayerInput Input;
     public float steerSensitivity;
     public float steerDamping;
@@ -53,7 +53,7 @@ public class HovercarController : MonoBehaviour
         springConstant = (rb.mass * 9.81f);
         steerSpeed*=rb.mass;
         steerDamping *= rb.mass;
-        isSteering = false;
+        isGryoSteering = false;
         hoverCameraOffset = hoverCamera.transform.position - transform.position;
     }
 
@@ -70,8 +70,9 @@ public class HovercarController : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddForce(steerInput, 0, (rb.mass * (speed + 2.041f)));
-        if (Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>() == 0 || UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue() - currentRotation == 0)
+        if (Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>() == 0 && Input.actions.FindAction("Steering (Mobile-Gyro)").ReadValue<float>() == 0)
         {
+            print(true);
             rb.AddForce(-rb.linearVelocity.x*steerDamping, 0, (rb.mass * (speed + 2.041f)));
         }
 
@@ -97,7 +98,6 @@ public class HovercarController : MonoBehaviour
     public void OnSteerButton()
     {
         steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
-        isSteering = true;
     }
 
     public void OnSteerAnalogue()
@@ -108,7 +108,7 @@ public class HovercarController : MonoBehaviour
     private void OnEnableGyro()
     {
         InputSystem.EnableDevice(UnityEngine.InputSystem.GravitySensor.current);
-        isSteering = true;
+        isGryoSteering = true;
     }
 
     private void OnDisableGyro()
