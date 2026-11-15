@@ -28,3 +28,19 @@ Toyful Games (2022) Making Custom Car Physics in Unity (for Very Very Valet). Av
 
 Unity (N/A) Sensor Support. Available at: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Sensors.html \[Accessed 05/11/2026]
 
+
+
+Jimmy Vegas (2024) HOW TO MAKE AN ENDLESS RUNNER IN UNITY - TUTORIAL 08 - BUILDING SEGMENTS. Available at: https://youtu.be/A4SOjni6fl8 \[Accessed 11/11/2026]
+
+
+
+Jimmy Vegas (2024) HOW TO MAKE AN ENDLESS RUNNER IN UNITY - TUTORIAL 09 - INFINITE GENERATION IN UNITY. Available at: https://youtu.be/rEn57zwzFGw \[Accessed 11/11/2026]
+
+
+
+anon4553185 (2010) How can I get a parent GameObject of gameObject using Javascript?. Available at: https://discussions.unity.com/t/how-can-i-get-a-parent-gameobject-of-gameobject-using-javascript/1801 \[Accessed 12/11/2026]
+
+
+
+
+

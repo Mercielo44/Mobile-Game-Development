@@ -95,37 +95,15 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "d5a1eadf-baf0-40f7-8846-cec83c535df7",
-                    "path": "1DAxis",
+                    "name": "",
+                    "id": "9f3e4cd4-d297-43b2-acf2-c0769adf08d4",
+                    "path": "<GravitySensor>/gravity",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Steering (Mobile-Gyro)",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "989139a3-c46b-4203-bba0-33ab91b7a498",
-                    "path": "<TrackedDevice>/deviceRotation/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steering (Mobile-Gyro)",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "cbada672-5e39-4917-8de9-6b0396b8f72e",
-                    "path": "<TrackedDevice>/deviceRotation/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steering (Mobile-Gyro)",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }
