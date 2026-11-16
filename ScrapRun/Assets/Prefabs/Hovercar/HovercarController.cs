@@ -28,6 +28,7 @@ public class HovercarController : MonoBehaviour
     public float steerSpeed;
     float steerInput;
     bool isGryoSteering;
+    Vector2<bool> canDash;
     public PlayerInput Input;
     public float steerSensitivity;
     public float steerDamping;
@@ -54,6 +55,7 @@ public class HovercarController : MonoBehaviour
         steerSpeed*=rb.mass;
         steerDamping *= rb.mass;
         isGryoSteering = false;
+        canDash = (false, false);
         hoverCameraOffset = hoverCamera.transform.position - transform.position;
     }
 
@@ -89,15 +91,30 @@ public class HovercarController : MonoBehaviour
             }
         }
     }
-    //on render fps
+    // Update is called once per frame
     private void Update()
     {
         hoverCamera.transform.position = transform.position + hoverCameraOffset;
     }
 
-    public void OnSteerButton()
+    public void OnSteerButton(InputAction.CallbackContext context)
     {
-        steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+        if (context.ReadValue<float>() > 0.5f && canDash == false)
+        {
+            steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+            canDash.x = true;
+        if (context.ReadValue<float>() > 0.5f && canDash.x == false)
+            {
+                steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+                canDash.y = true;
+            }
+        }
+        if (context.ReadValue<float>() > 0.5f && canDash == (true, true))
+        {
+            OnSideDash(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+            steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+        }
+
     }
 
     public void OnSteerAnalogue()
@@ -109,6 +126,12 @@ public class HovercarController : MonoBehaviour
     {
         InputSystem.EnableDevice(UnityEngine.InputSystem.GravitySensor.current);
         isGryoSteering = true;
+    }
+
+    void OnSideDash(float input)
+    {
+
+        transform.right = transform.right * (10 * input * Time.fixedDeltaTime);
     }
 
     private void OnDisableGyro()
