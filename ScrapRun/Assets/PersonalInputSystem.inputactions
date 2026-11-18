@@ -12,7 +12,7 @@
                     "id": "40da5b08-fc85-4951-9a5c-a96da9b852f4",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.75),MultiTap",
                     "initialStateCheck": true,
                     "priority": 0
                 },

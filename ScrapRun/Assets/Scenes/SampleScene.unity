@@ -1275,6 +1275,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 15804561819247219, guid: a542ed265d61f3649b23b354d6a5b256, type: 3}
+      propertyPath: steerSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 15804561819247219, guid: a542ed265d61f3649b23b354d6a5b256, type: 3}
       propertyPath: velocityText
       value: 
       objectReference: {fileID: 1171820527}
@@ -1316,6 +1320,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6284311695306616070, guid: a542ed265d61f3649b23b354d6a5b256, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431340367777142029, guid: a542ed265d61f3649b23b354d6a5b256, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8966708064078710074, guid: a542ed265d61f3649b23b354d6a5b256, type: 3}

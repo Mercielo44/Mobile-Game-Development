@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,7 +29,7 @@ public class HovercarController : MonoBehaviour
     public float steerSpeed;
     float steerInput;
     bool isGryoSteering;
-    Vector2<bool> canDash;
+    bool2 canDash;
     public PlayerInput Input;
     public float steerSensitivity;
     public float steerDamping;
@@ -55,7 +56,7 @@ public class HovercarController : MonoBehaviour
         steerSpeed*=rb.mass;
         steerDamping *= rb.mass;
         isGryoSteering = false;
-        canDash = (false, false);
+        canDash = new bool2(false, false);
         hoverCameraOffset = hoverCamera.transform.position - transform.position;
     }
 
@@ -64,8 +65,8 @@ public class HovercarController : MonoBehaviour
     {
         rb.centerOfMass = HovercarCenterOfMass.transform.localPosition;
         rb.linearVelocity = new Vector3(0, 0, speed);
-        OnEnableGyro();
-        currentRotation = UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue();
+        //OnEnableGyro();
+        //currentRotation = UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue();
     }
 
     // FixedUpdate is called at fixed intervals during unity's physics update loop
@@ -74,7 +75,7 @@ public class HovercarController : MonoBehaviour
         rb.AddForce(steerInput, 0, (rb.mass * (speed + 2.041f)));
         if (Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>() == 0 && Input.actions.FindAction("Steering (Mobile-Gyro)").ReadValue<float>() == 0)
         {
-            print(true);
+            //print(true);
             rb.AddForce(-rb.linearVelocity.x*steerDamping, 0, (rb.mass * (speed + 2.041f)));
         }
 
@@ -99,20 +100,31 @@ public class HovercarController : MonoBehaviour
 
     public void OnSteerButton(InputAction.CallbackContext context)
     {
-        if (context.ReadValue<float>() > 0.5f && canDash == false)
+        
+        steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+        print(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+        /*else if (context.duration < 0.5f && canDash.x == true && canDash.y == false)
         {
             steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
-            canDash.x = true;
-        if (context.ReadValue<float>() > 0.5f && canDash.x == false)
-            {
-                steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
-                canDash.y = true;
-            }
-        }
-        if (context.ReadValue<float>() > 0.5f && canDash == (true, true))
+            print(canDash);
+            canDash = new bool2(false, false);
+
+        }*/
+        /*else if (context.duration < 0.5f && canDash.x == true && canDash.y == true)
         {
+            print(canDash);
+            canDash = new bool2(false, false);
             OnSideDash(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
             steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+        }*/
+        if (context.performed)
+        {
+            print(true);
+            OnSideDash(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+            //steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+        }
+        if (context.canceled){
+            print(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
         }
 
     }
@@ -131,7 +143,8 @@ public class HovercarController : MonoBehaviour
     void OnSideDash(float input)
     {
 
-        transform.right = transform.right * (10 * input * Time.fixedDeltaTime);
+        rb.AddForce(transform.right*100*rb.mass*input, ForceMode.Impulse);
+        print(true);
     }
 
     private void OnDisableGyro()
