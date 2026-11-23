@@ -53,7 +53,13 @@ Unity (N/A) Struct InputAction.CallbackContext. Available at: https://docs.unity
 unity_9R1oHxYOzMhCHw (2021) [New Input System] Single Tap vs Double Tap. Available at: https://discussions.unity.com/t/new-input-system-single-tap-vs-double-tap/846957/3 [Accessed 18/11/2026]
 
 
+
 Code Monkey (2019) Double Click to Dash in Unity (Unity Tutorial for Beginners). Available at: https://youtu.be/9pKXXNgCgq8 [Accessed 23/11/2026]
+
+
+
+Hoeloe (2014) Hypothetical: What happens if Time.time overflows? Available at: https://discussions.unity.com/t/hypothetical-what-happens-if-time-time-overflows/103827 [Accessed 23/11/2026]
+
 
 
 Bugnet (2026) How to Fix Unity PlayerInput Events Firing Twice with the New Input System. Available at: https://bugnet.io/blog/how-to-fix-unity-playerinput-events-firing-twice [Accessed 23/11/2026]
