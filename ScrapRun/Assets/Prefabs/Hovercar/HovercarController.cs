@@ -111,17 +111,28 @@ public class HovercarController : MonoBehaviour
         goingRight = Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>() == 1;
         float timeSinceLastTap = Time.time - lastPressTime;
         float timeSinceLastDash = Time.time - lastDashTime;
-        print(timeSinceLastTap);
+
+        print(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
 
         if (timeSinceLastTap <= 0.2f && wentRight == goingRight && timeSinceLastDash >= 1)
         {
-            print(wentRight == goingRight);
-            print(timeSinceLastDash);
-            print("Dash");
-            OnSideDash(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
-            lastDashTime = Time.time;
+            if (wentRight == false)
+            {
+                lastDashTime = Time.time;
+                steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+                OnSideDash(-1);
+            }
+            else
+            {
+                lastDashTime = Time.time;
+                steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+                OnSideDash(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
+
+            }
+        }
+        else if (!context.performed)
+        {
             steerInput = (steerSpeed * Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
-        }else if (!context.performed) {
             return;
         }
         else
