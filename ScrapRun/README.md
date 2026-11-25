@@ -42,5 +42,24 @@ anon4553185 (2010) How can I get a parent GameObject of gameObject using Javascr
 
 
 
+Unity (N/A) bool2. Available at: https://docs.unity.com/en-us/engine/6000.5/script-reference/unity/mathematics/bool2 [Accessed 18/11/2026]
 
 
+
+Unity (N/A) Struct InputAction.CallbackContext. Available at: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.13/api/UnityEngine.InputSystem.InputAction.CallbackContext.html [Accessed 18/11/2026]
+
+
+
+unity_9R1oHxYOzMhCHw (2021) [New Input System] Single Tap vs Double Tap. Available at: https://discussions.unity.com/t/new-input-system-single-tap-vs-double-tap/846957/3 [Accessed 18/11/2026]
+
+
+
+Code Monkey (2019) Double Click to Dash in Unity (Unity Tutorial for Beginners). Available at: https://youtu.be/9pKXXNgCgq8 [Accessed 23/11/2026]
+
+
+
+Hoeloe (2014) Hypothetical: What happens if Time.time overflows? Available at: https://discussions.unity.com/t/hypothetical-what-happens-if-time-time-overflows/103827 [Accessed 23/11/2026]
+
+
+
+Bugnet (2026) How to Fix Unity PlayerInput Events Firing Twice with the New Input System. Available at: https://bugnet.io/blog/how-to-fix-unity-playerinput-events-firing-twice [Accessed 23/11/2026]
