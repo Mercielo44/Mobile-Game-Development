@@ -6,16 +6,23 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
     public GameObject[] segments;
+    public GameObject finishLine;
     int segementNum;
+    long checkPointCount;
+    int playerSpeed;
 
     int zPos = 900;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerSpeed = 100;
         for (int i = 0; i < 3; i++) {
             spawnObstacle(200+(250*i));
         }
         StartCoroutine(SegmentGen());
+
+        finishLine.transform.position = new Vector3 (0,0,playerSpeed * (Random.Range(110, 170)));
+        print(finishLine.transform.position);
     }
 
     // Update is called once per frame
