@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SegmentGen()
     {
-        while (true)
+        while (GameManager.gameManager.hitCheckPoint == false)
         {
             spawnObstacle(HovercarController.instance.transform.position.z + zPos);
             yield return new WaitForSeconds(3);
