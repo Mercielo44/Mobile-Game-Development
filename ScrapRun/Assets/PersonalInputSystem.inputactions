@@ -20,7 +20,7 @@
                     "name": "Steering (Mobile-Gyro)",
                     "type": "Value",
                     "id": "44ed086d-8f2a-4a44-bacd-5020ebb5ca0e",
-                    "expectedControlType": "Vector3",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true,

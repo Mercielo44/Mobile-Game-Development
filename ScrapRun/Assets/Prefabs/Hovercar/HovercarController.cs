@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -72,15 +71,15 @@ public class HovercarController : MonoBehaviour
     {
         rb.centerOfMass = HovercarCenterOfMass.transform.localPosition;
         rb.linearVelocity = new Vector3(0, 0, speed);
-        //OnEnableGyro();
-        //currentRotation = UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue();
+        OnEnableGyro();
+        currentRotation = UnityEngine.InputSystem.GravitySensor.current.gravity.y.ReadValue();
     }
 
     // FixedUpdate is called at fixed intervals during unity's physics update loop
     void FixedUpdate()
     {
         rb.AddForce(steerInput, 0, (rb.mass * (speed + 2.041f)));
-        if (Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>() == 0 && Input.actions.FindAction("Steering (Mobile-Gyro)").ReadValue<float>() == 0)
+        if (Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>() == 0 && Input.actions.FindAction("Steering (Mobile-Gyro)").ReadValue<Vector3>().y == 0)
         {
             //print(true);
             rb.AddForce(-rb.linearVelocity.x*steerDamping, 0, (rb.mass * (speed + 2.041f)));

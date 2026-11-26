@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(SegmentGen());
 
-        finishLine.transform.position = new Vector3 (0,0,playerSpeed * 12/*(Random.Range(110, 170))*/);
+        finishLine.transform.position = new Vector3 (0,0,playerSpeed * 240/*(Random.Range(110, 170))*/);
         print(finishLine.transform.position);
     }
 
