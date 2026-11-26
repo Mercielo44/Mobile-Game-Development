@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 6284311695306616070}
   m_Layer: 0
   m_Name: HovercarPrefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

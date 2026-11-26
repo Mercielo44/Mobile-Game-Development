@@ -34,7 +34,7 @@ public class HovercarController : MonoBehaviour
     public float steerSpeed;
     float steerInput;
     bool isGryoSteering;
-    bool2 canDash;
+    Vector3 trailingCameraPos;
     public PlayerInput Input;
     public float steerSensitivity;
     public float steerDamping;
@@ -61,7 +61,6 @@ public class HovercarController : MonoBehaviour
         steerSpeed*=rb.mass;
         steerDamping *= rb.mass;
         isGryoSteering = false;
-        canDash = new bool2(false, false);
         hoverCameraOffset = hoverCamera.transform.position - transform.position;
         lastPressTime = 0.200000000001f;
         goingRight = false;
@@ -103,7 +102,9 @@ public class HovercarController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (GameManager.gameManager.hitCheckPoint == false) {
         hoverCamera.transform.position = transform.position + hoverCameraOffset;
+        }
     }
 
     public void OnSteerButton(InputAction.CallbackContext context)
@@ -111,8 +112,6 @@ public class HovercarController : MonoBehaviour
         goingRight = Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>() == 1;
         float timeSinceLastTap = Time.time - lastPressTime;
         float timeSinceLastDash = Time.time - lastDashTime;
-
-        print(Input.actions.FindAction("Steering(Keyboard)").ReadValue<float>());
 
         if (timeSinceLastTap <= 0.2f && wentRight == goingRight && timeSinceLastDash >= 1)
         {
@@ -167,5 +166,11 @@ public class HovercarController : MonoBehaviour
         InputSystem.DisableDevice(UnityEngine.InputSystem.GravitySensor.current);
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Finish"))
+        {
+            GameManager.gameManager.hitCheckPoint = true;
+        }
+    }
 }

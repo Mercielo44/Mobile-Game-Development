@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4917615014137317226}
   - component: {fileID: 1514707221882086670}
   - component: {fileID: 6344322979563929438}
+  - component: {fileID: -2100116004287398864}
   m_Layer: 0
   m_Name: FinishLine
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1243, z: -150}
-  m_LocalScale: {x: 5000, y: 2500, z: 12.75}
+  m_LocalScale: {x: 400000, y: 2500, z: 12.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,3 +113,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-2100116004287398864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682851446814395991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2b81184451e3f4886c1032548c2d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinishLineCollision

@@ -7,11 +7,26 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;
     public GameObject[] segments;
     public GameObject finishLine;
+    public GameObject playerCamera;
+    public GameObject upgradeMenuCamera;
     int segementNum;
     long checkPointCount;
+    long score;
     int playerSpeed;
+    public bool hitCheckPoint;
 
     int zPos = 900;
+
+    void Awake()
+    {
+        if (gameManager)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        gameManager = this;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +36,7 @@ public class GameManager : MonoBehaviour
         }
         StartCoroutine(SegmentGen());
 
-        finishLine.transform.position = new Vector3 (0,0,playerSpeed * (Random.Range(110, 170)));
+        finishLine.transform.position = new Vector3 (0,0,playerSpeed * 12/*(Random.Range(110, 170))*/);
         print(finishLine.transform.position);
     }
 
@@ -45,4 +60,11 @@ public class GameManager : MonoBehaviour
         Instantiate(segments[segementNum], new Vector3(segments[segementNum].transform.position.x, segments[segementNum].transform.position.y, zOffest), Quaternion.identity);
     }
 
+    public void switchCameras(GameObject camera1, GameObject camera2)
+    {
+        camera1.SetActive(false);
+        camera1.GetComponent<AudioListener>().enabled = false;
+        camera2.SetActive(true);
+        camera2.GetComponent<AudioListener>().enabled = true;
+    }
 }
